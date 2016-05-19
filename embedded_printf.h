@@ -165,12 +165,6 @@ extern "C" {
  * 		1. All integers are interpreted as 32 bits
  * 		2. Characters (char) are unsigned 8 bits
  * 		3. All hexadecimal output is preceded with 0x;
- *
- * Comments:
- * - I decided to create this function without any use of 'goto'
- * - Remember "var = *(p++)" results in "1: var = *p; 2: p = p+1;" This is
- *   i++ means increase i, but return the value if i before increasing.
- *
  */
 void embedded_printf(const uint8_t *format, ...);
 

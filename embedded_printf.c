@@ -128,40 +128,6 @@ static void divideAndPutInOutputBuffer(uint32_t * number, uint32_t dividend);
  * Function Name : embedded_printf
  * Description   : A stripped down version of the c standard printf function.
  *
- * Standard c library printf formatting tag prototype:
- *
- * 				%[flags][width][.precision][length]specifier
- *
- * Embedded printf stripped down formatting tag prototype:
- *
- * 				%[flags][width]specifier
- *
- * Supported flags:
- * 		0	zero padding
- *
- * Supported width:
- * 		Up to 255
- *
- * Supported precision
- * 		none
- *
- * Supported length
- * 		none	see note 1.
- *
- * Supported specifiers:
- * 		c	single character
- * 		d	signed decimal integer
- * 		i	<same as d>
- * 		s	string of characters
- * 		u	unsigned decimal integer
- * 		x	unsigned hexadecimal integer
- * 		X	unsigner hexadecimal integer with capital letters
- *
- * Notes:
- * 		1. All integers are interpreted as 32 bits
- * 		2. Characters (char) are unsigned 8 bits
- * 		3. All hexadecimal output is preceded with 0x;
- *
  * Comments:
  * - I decided to create this function without any use of 'goto'
  * - Remember "var = *(p++)" results in "1: var = *p; 2: p = p+1;" This is since
