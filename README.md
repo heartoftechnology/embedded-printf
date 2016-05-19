@@ -50,15 +50,15 @@ X	| unsigner hexadecimal integer with capital letters
 ## How to use the library
 The function embedded_printf() can be used in the same way as printf is used but with limited functionality as described above. In order to get the library running in a project follow these steps:  
 
-1. In printf.h include the definitions header for the architecture independend standard types **uint8_t**, **uint32_t** and **int32_t**. 
-2. In printf.h include the definition for **ASSERT**. Alternatively define ASSERT but leave it blank.
-3. In printf.h edit the macro **embedded_putChar(u8character)** to map it to the desired character output function. See code below which uses the UART_PutChar function as example:  
+1. In embedded_printf.h, include the definitions header for the architecture independend standard types **uint8_t**, **uint32_t** and **int32_t**.
+2. In embedded_printf.h, include the definition for **ASSERT**. Alternatively define ASSERT but leave it blank.
+3. In embedded_printf.h, edit the macro **embedded_putChar(u8character)** to map it to the desired character output function. See code below which uses the UART_PutChar function as example:  
 
     ```c
     /*!< Macro to map the character output to the application specific output */
     #define embedded_putChar(u8character)			UART_PutChar(u8character)
     ```
-4. If desired: define a macro to map printf to embedded_printf:  
+4. If desired: in embedded_printf.h, define a macro to map printf to embedded_printf:  
 
     ```c
     /*!< Macro to map printf to embedded_printf */
