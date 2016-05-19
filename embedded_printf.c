@@ -164,7 +164,7 @@ static void divideAndPutInOutputBuffer(uint32_t * number, uint32_t dividend);
  *
  * Comments:
  * - I decided to create this function without any use of 'goto'
- * - Remember "var = *(p++)" results in "1: var = *p; 2: p = p+1;" This is
+ * - Remember "var = *(p++)" results in "1: var = *p; 2: p = p+1;" This is since
  *   i++ means increase i, but return the value if i before increasing.
  *
  *
