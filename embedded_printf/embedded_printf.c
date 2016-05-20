@@ -1,5 +1,5 @@
 /*
- * 		Copyright (c) 2016, Christean van der Mijden
+ * 		Copyright (c) 2016, Christean van der Mijden and Heart of Technology
  * 		All rights reserved.
  *
  *		Filename   	: embedded_printf.c
@@ -17,11 +17,6 @@
  *	under the terms of the GNU Lesser General Public License as published by the
  *	Free Software Foundation; either version 3.0 of the License, or (at your
  *	option) any later version.
- *
- *	This library is distributed in the hope that it will be useful, but WITHOUT
- *	ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- *	FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License
- *	for more details.
  *
  *	The GNU Lesser General Public License v3.0 can be found here:
  *
@@ -56,6 +51,26 @@
  * 	THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * 	(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * 	OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ *
+ *
+ * Tiny printf license
+ *
+ * Copyright © 2004, 2008, Kustaa Nyholm
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
  */
 #include "embedded_printf.h"
@@ -98,21 +113,29 @@ static uint8_t embpf_InternalFlags = 0u;
  * Private function declaration
  ******************************************************************************/
 
-/*
- * Puts a character into the output buffer string and increases the position
- * pointer by 1
+/*!
+ * @description Puts a character into the output buffer string and increases the
+ * position pointer by 1
+ *
+ * @param [in] character 		the character to be put into the buffer
  */
 static void putInOutputBuffer(uint8_t character);
 
-/*
- * Turns the decimal or hexadecimal digit into it's ASCII equivalent and puts
- * it into the output buffer
+/*!
+ * @description Turns the decimal or hexadecimal digit into it's ASCII
+ * equivalent and puts it into the output buffer
+ *
+ * @param [in] outputDigit  	decimal unsigned integer value between 0 an 9 OR
+ * 					  			a hexadecimal unsigned integer value between 0
+ * 					  			and 15
  */
 static void putDigitInOutputBuffer(uint8_t digit);
 
-/*
- * Divides the u32integerNumber by the dividend and puts the number of
- * divisions into the output buffer
+/*!
+ * @description Divides the u32integerNumber by the dividend and puts the number
+ * of divisions into the output buffer
+ *
+ * @param [in] dividend 		the value to divide by
  */
 static void divideAndPutInOutputBuffer(uint32_t * number, uint32_t dividend);
 
@@ -132,7 +155,6 @@ static void divideAndPutInOutputBuffer(uint32_t * number, uint32_t dividend);
  * - I decided to create this function without any use of 'goto'
  * - Remember "var = *(p++)" results in "1: var = *p; 2: p = p+1;" This is since
  *   i++ means increase i, but return the value if i before increasing.
- *
  *
  *END**************************************************************************/
 void embedded_printf(const uint8_t *format, ...)
@@ -406,8 +428,6 @@ void embedded_printf(const uint8_t *format, ...)
  * Description   : Puts a character into the output buffer string and increases
  * 				   the position pointer by 1
  *
- * Param [in] character : the character to be put into the buffer
- *
  *END**************************************************************************/
 static void putInOutputBuffer(uint8_t character)
 {
@@ -421,10 +441,6 @@ static void putInOutputBuffer(uint8_t character)
  * Function Name : putDigitInOutputBuffer
  * Description   : Puts a character into the output buffer string and increases
  * 				   the position pointer by 1
- *
- * Param [in] outputDigit :
- * 						a decimal unsigned integer value between 0 an 9 	OR
- * 					  	a hexadecimal unsigned integer value between 0 and 15
  *
  *END**************************************************************************/
 static void putDigitInOutputBuffer(uint8_t outputDigit)
@@ -460,8 +476,6 @@ static void putDigitInOutputBuffer(uint8_t outputDigit)
  * Function Name : divideAndPutInOutputBuffer
  * Description   : Divides the u32integerNumber by the dividend and puts the
  * 				   number of divisions into the output buffer
- *
- * Param [in] dividend : the value to divide by
  *
  *END**************************************************************************/
 static void divideAndPutInOutputBuffer(uint32_t * number, uint32_t dividend)

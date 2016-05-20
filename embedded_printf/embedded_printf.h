@@ -1,5 +1,5 @@
 /*
- * 		Copyright (c) 2016, Christean van der Mijden
+ * 		Copyright (c) 2016, Christean van der Mijden and Heart of Technology
  * 		All rights reserved.
  *
  *		Filename   	: embedded_printf.h
@@ -17,11 +17,6 @@
  *	under the terms of the GNU Lesser General Public License as published by the
  *	Free Software Foundation; either version 3.0 of the License, or (at your
  *	option) any later version.
- *
- *	This library is distributed in the hope that it will be useful, but WITHOUT
- *	ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- *	FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License
- *	for more details.
  *
  *	The GNU Lesser General Public License v3.0 can be found here:
  *
@@ -57,6 +52,26 @@
  * 	(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * 	OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
+ *
+ *
+ * Tiny printf license
+ *
+ * Copyright © 2004, 2008, Kustaa Nyholm
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ *
  */
 #ifndef __EMBEDDED_PRINTF_H_
 #define __EMBEDDED_PRINTF_H_
@@ -64,11 +79,30 @@
 
 /*! @file
  *
- * Embedded printf is a stripped down version of the c standard printf function.
+ * Embedded printf is a stripped down version of the c standard printf function:
+ * A tiny footprint printf function for 32bits embedded microcontroller
+ * applications based on Kustaa Nyholm's Tiny printf
  *
- * It is almost a 1-1 copy of Tiny printf by Kustaa Nyholm. Yet with a lot of
- * comments explaining the code as well as descriptive variable names. In
- * addition embedded printf is written for 32bits ints.
+ *
+ * Embedded printf finds its origin in the search for a small printf function to
+ * use with ARM Cortex-M microcontrollers. Printf in conjuction with a UART and
+ * serial-to-USB converter is a convenient way to get debug information out of
+ * the controller during development. However the C standard printf library
+ * function is not really usable in microcontrollers with small ROM (Flash)
+ * sizes as it takes a lot of space leaving little to none for the 'real' code.
+ *
+ * Kustaa Nyholm's Tiny printf and its revisited version were found through a
+ * Google search for a printf alternative. Embedded printf was born out of the
+ * desire not just to use tiny printf, but to actually understand what is going
+ * on as well and to help others to do so too. Compared to Tiny printf, Embedded
+ * printf is almost an exact copy of its structure and code. However with the
+ * following changes:
+ *
+ * - Lots of comments to explain what is happening and why
+ * - Using descriptive variable and function names
+ * - No variable assignents inside the evaluation of a while/for/if statement
+ * - No goto statements
+ * - 32-bits architecture
  *
  * Tiny printf can be found here:
  *
@@ -77,13 +111,6 @@
  * Or its's revisited and even smaller footprint version here:
  *
  * 		http://www.sparetimelabs.com/printfrevisited/printfrevisited.php
- *
- * Instead of just implementing any version of Tiny printf I wanted to create a
- * source code that also helps to understand non-seasoned embedded programmers
- * what happens under the hood.
- *
- *
- * Note: Embedded printf is written for a 32bits microcontroller architecture.
  *
  *
  * To use this library:
@@ -95,13 +122,15 @@
  * 	  - include the header providing the function definition for your function
  * 	  - use the macro #define embedded_putChar(u8character) to map this to your
  * 	    putChar (or similar) function.
+ * 4: Optional: define a macro to map the standard printf to embedded_printf
  *
  */
 #include <stdarg.h> 	/*<! required for the va_list library functions */
 
 
 /* Include(s) to provide standard types and ASSERT */
-
+#include "KExx_drivers_common.h"
+#include "app_config.h"
 
 
 
@@ -110,7 +139,10 @@
  ******************************************************************************/
 
 /*!< Macro to map the character output to the application specific output */
-#define embedded_putChar(u8character)			//UART_PutChar(u8character)
+#define embedded_putChar(u8character)			UART_PutChar(TERMINAL_PORT, \
+														 	 u8character)
+/*!< Macro to map printf to embedded_printf */
+//#define printf								embedded_printf
 
 
 
@@ -134,37 +166,37 @@ extern "C" {
  *
  * Standard c library printf formatting tag prototype:
  *
- * 				%[flags][width][.precision][length]specifier
+ * %[flags][width][.precision][length]specifier
  *
  * Embedded printf stripped down formatting tag prototype:
  *
- * 				%[flags][width]specifier
+ * %[flags][width]specifier
  *
  * Supported flags:
- * 		0	zero padding
+ * 0	zero padding
  *
  * Supported width:
- * 		Up to 255
+ * Up to 255
  *
  * Supported precision
- * 		none
+ * none
  *
  * Supported length
- * 		none	see note 1.
+ * none	see note 1.
  *
  * Supported specifiers:
- * 		c	single character
- * 		d	signed decimal integer
- * 		i	<same as d>
- * 		s	string of characters
- * 		u	unsigned decimal integer
- * 		x	unsigned hexadecimal integer
- * 		X	unsigner hexadecimal integer with capital letters
+ * c	single character
+ * d	signed decimal integer
+ * i	<same as d>
+ * s	string of characters
+ * u	unsigned decimal integer
+ * x	unsigned hexadecimal integer
+ * X	unsigner hexadecimal integer with capital letters
  *
- * Notes:
- * 		1. All integers are interpreted as 32 bits
- * 		2. Characters (char) are unsigned 8 bits
- * 		3. All hexadecimal output is preceded with 0x;
+ * @Note
+ * 1. All integers are interpreted as 32 bits
+ * 2. Characters (char) are unsigned 8 bits
+ * 3. All hexadecimal output is preceded with 0x;
  */
 void embedded_printf(const uint8_t *format, ...);
 
