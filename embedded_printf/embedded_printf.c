@@ -483,7 +483,7 @@ static void divideAndPutInOutputBuffer(uint32_t * number, uint32_t dividend)
 	uint8_t outputDigit = 0u;
 
 	/* Count how many times the division can be done */
-	while((*number) > dividend)
+	while((*number) >= dividend)
 	{
 		(*number) -= dividend;
 		outputDigit++;
