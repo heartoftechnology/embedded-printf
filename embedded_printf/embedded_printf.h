@@ -56,7 +56,7 @@
  *
  * Tiny printf license
  *
- * Copyright © 2004, 2008, Kustaa Nyholm
+ * Copyright ï¿½ 2004, 2008, Kustaa Nyholm
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -126,12 +126,7 @@
  *
  */
 #include <stdarg.h> 	/*<! required for the va_list library functions */
-
-
-/* Include(s) to provide standard types and ASSERT */
-#include "KExx_drivers_common.h"
-#include "app_config.h"
-
+#include <stdint.h>
 
 
 /*******************************************************************************
