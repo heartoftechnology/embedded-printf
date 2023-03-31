@@ -220,12 +220,11 @@ void embedded_printf(const uint8_t *format, ...)
 	va_start(arguments, format);
 
 	/* Put the first character of the format into the evaluation variable */
-	currentCharacter = *format;
+	currentCharacter = *(format++);
 
 	/*
 	 * Step through the input string and evaluate each character:
 	 */
-	currentCharacter = *(format++);
 	while(currentCharacter)
 	{
 		/*
