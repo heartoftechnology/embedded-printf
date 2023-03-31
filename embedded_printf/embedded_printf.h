@@ -1,17 +1,25 @@
 /*
- * 		Copyright (c) 2016, Christean van der Mijden and Heart of Technology
+ * 		Copyright (C) 2023, Christean van der Mijden and Heart of Technology
  * 		All rights reserved.
  *
  *		Filename   	: embedded_printf.h
  *		Author	  	: Christean van der Mijden
- *		Date		: 5 May 2016
- *		Version		: 1.00
+ *		Date		: 31 March 2023
+ *		Version		: 1.01
  *
  *		Project		: N/A
  *		Processor	: N/A
  *		Component	: stripped down printf for embedded applications
- *		Compiler	: Cross GCC ARM
+ *		Compiler	: GCC ARM
  *
+ *	Revision History:
+ *	------------------------------------------------------------------------
+ *	5  May 2016				version 1
+ *	31 March 2023
+ *
+ *
+ *
+ *	@license
  *
  *	This library is free software; you can redistribute it and/or modify it
  *	under the terms of the GNU Lesser General Public License as published by the
@@ -56,7 +64,7 @@
  *
  * Tiny printf license
  *
- * Copyright � 2004, 2008, Kustaa Nyholm
+ * Copyright (C) 2004, 2008, Kustaa Nyholm
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -115,18 +123,16 @@
  *
  * To use this library:
  *
- * 1: Provide definitions for the standard types uint8_t, uint32_t and int32_t
- * 	  by including your header
- * 2: Provide a definition of ASSERT by including your header
- * 3: Provide a means to output the characters:
+ * 1: Provide a definition of ASSERT by including your header
+ * 2: Provide a means to output the characters:
  * 	  - include the header providing the function definition for your function
  * 	  - use the macro #define embedded_putChar(u8character) to map this to your
  * 	    putChar (or similar) function.
- * 4: Optional: define a macro to map the standard printf to embedded_printf
+ * 3: Optional: define a macro to map the standard printf to embedded_printf
  *
  */
 #include <stdarg.h> 	/*<! required for the va_list library functions */
-#include <stdint.h>
+#include <stdint.h>		/*<! definition for platform independent types */
 
 
 /*******************************************************************************

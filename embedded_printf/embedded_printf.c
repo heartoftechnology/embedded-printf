@@ -1,17 +1,25 @@
 /*
- * 		Copyright (c) 2016, Christean van der Mijden and Heart of Technology
+ * 		Copyright (C) 2023, Christean van der Mijden and Heart of Technology
  * 		All rights reserved.
  *
- *		Filename   	: embedded_printf.c
+ *		Filename   	: embedded_printf.h
  *		Author	  	: Christean van der Mijden
- *		Date		: 5 May 2016
- *		Version		: 1.00
+ *		Date		: 31 March 2023
+ *		Version		: 1.01
  *
  *		Project		: N/A
  *		Processor	: N/A
  *		Component	: stripped down printf for embedded applications
- *		Compiler	: Cross GCC ARM
+ *		Compiler	: GCC ARM
  *
+ *	Revision History:
+ *	------------------------------------------------------------------------
+ *	5  May 2016				version 1
+ *	31 March 2023
+ *
+ *
+ *
+ *	@license
  *
  *	This library is free software; you can redistribute it and/or modify it
  *	under the terms of the GNU Lesser General Public License as published by the
@@ -56,7 +64,7 @@
  *
  * Tiny printf license
  *
- * Copyright © 2004, 2008, Kustaa Nyholm
+ * Copyright (C) 2004, 2008, Kustaa Nyholm
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
