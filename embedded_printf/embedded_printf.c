@@ -421,7 +421,7 @@ void embedded_printf(const uint8_t *format, ...)
 			 */
 			while(formatWidth-- > 0u)
 			{
-				if(embpf_InternalFlags && FLAG_USE_ZERO_PADDING)
+				if(embpf_InternalFlags & FLAG_USE_ZERO_PADDING)
 				{
 					embedded_putChar('0');
 				}
@@ -494,7 +494,7 @@ static void putDigitInOutputBuffer(uint8_t outputDigit)
 	/* A digit between 10 and 15 is a hexadecimal letter. */
 	else
 	{
-		if(embpf_InternalFlags && FLAG_HEX_USE_CAPITALS)
+		if(embpf_InternalFlags & FLAG_HEX_USE_CAPITALS)
 		{
 			putInOutputBuffer((outputDigit - 10u) + 'A');
 		}
@@ -529,7 +529,7 @@ static void divideAndPutInOutputBuffer(uint32_t * number, uint32_t dividend)
 	}
 
 	/* Print the count if >0, OR if it's a zero that follows a non-zero digit */
-	if((outputDigit > 0u) || (embpf_InternalFlags && FLAG_IS_NOT_FIRST_DIGIT))
+	if((outputDigit > 0u) || (embpf_InternalFlags & FLAG_IS_NOT_FIRST_DIGIT))
 	{
 		putDigitInOutputBuffer(outputDigit);
 	}
