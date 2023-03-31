@@ -123,7 +123,7 @@
  *
  * To use this library:
  *
- * 1: Provide a definition of ASSERT by including your header
+ * 1: Provide a definition of ASSERT(x) by including your header
  * 2: Provide a means to output the characters:
  * 	  - include the header providing the function definition for your function
  * 	  - use the macro #define embedded_putChar(u8character) to map this to your
@@ -133,11 +133,16 @@
  */
 #include <stdarg.h> 	/*<! required for the va_list library functions */
 #include <stdint.h>		/*<! definition for platform independent types */
+//#include "assert.h"	/*<! provide your own macro for ASSERT here */
 
 
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
+#ifndef ASSERT
+	#error "Please provide a definition for ASSERT(x)"
+#endif
+
 
 /*!< Macro to map the character output to the application specific output */
 #define embedded_putChar(u8character)			UART_PutChar(TERMINAL_PORT, \
