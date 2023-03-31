@@ -148,7 +148,12 @@
 #define embedded_putChar(u8character)			UART_PutChar(TERMINAL_PORT, \
 														 	 u8character)
 /*!< Macro to map printf to embedded_printf */
-//#define printf								embedded_printf
+//#define printf(x)								embedded_printf(x)
+
+/*!< Macro to map embedded_printf() to ebd_printf() so your code can use the
+ * shorter ebd_printf() */
+//#define embedded_printf(x)		ebd_printf(x)
+
 
 
 
