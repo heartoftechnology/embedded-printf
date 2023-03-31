@@ -16,7 +16,7 @@ Kustaa Nyholm's Tiny printf and its revisited version were found through a Googl
 ## Supported printf functionality
 Embedded printf can be used as a regular printf function, but with limited functionality.  
 
-###Format tag prototype
+### Format tag prototype
 
 The C standard printf function uses the following format tag prototype:  
 ```
@@ -26,16 +26,16 @@ Embedded printf does **not support floating point** nor the **length parameter**
 ```
 %[flags][width]specifier
 ```
-###Supported flags:   
+### Supported flags:   
 
 flag | description
 -----|----------
 0 | zero padding (instead of spaces)
 
-###Supported width:
+### Supported width:
 255 (8 bits)
 
-###Supported specifiers:   
+### Supported specifiers:   
 
 specifier | output
 ----------|----------
