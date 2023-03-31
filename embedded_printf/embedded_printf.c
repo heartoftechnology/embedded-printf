@@ -239,6 +239,10 @@ void embedded_printf(const uint8_t *format, ...)
 		/* When a '%' is encountered it means formatting is required. */
 		else
 		{
+			/* Clear all flags before formatting the current character */
+			embpf_InternalFlags = 0u;
+
+			/* Clear width variable too */
 			formatWidth = 0u;
 
 			/* Get next character (i.e. the one following the '%') */
@@ -347,9 +351,6 @@ void embedded_printf(const uint8_t *format, ...)
 					divideAndPutInOutputBuffer(&u32integerNumber,        100u);
 					divideAndPutInOutputBuffer(&u32integerNumber,         10u);
 					putDigitInOutputBuffer(u32integerNumber);
-
-					/* Clear flag in case another number must be formatted */
-					embpf_InternalFlags &= ~FLAG_IS_NOT_FIRST_DIGIT;
 
 					break;
 
