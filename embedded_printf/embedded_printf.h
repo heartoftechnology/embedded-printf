@@ -127,7 +127,8 @@
  * 2: Provide a means to output the characters:
  * 	  - include the header providing the function definition for your function
  * 	  - use the macro #define embedded_putChar(u8character) to map this to your
- * 	    putChar (or similar) function.
+ * 	    putChar (or similar) function. E.g. something that puts the character on
+ * 	    a UART/Serial output
  * 3: Optional: define a macro to map the standard printf to embedded_printf
  *
  */
@@ -145,13 +146,15 @@
 
 
 /*!< Macro to map the character output to the application specific output */
-#define embedded_putChar(u8character)			UART_PutChar(TERMINAL_PORT, \
-														 	 u8character)
+#define embedded_putChar(u8character)			UART_PutChar(u8character)
+
 /*!< Macro to map printf to embedded_printf */
 //#define printf(x)								embedded_printf(x)
 
-/*!< Macro to map embedded_printf() to ebd_printf() so your code can use the
- * shorter ebd_printf() */
+/*!
+ * Macro to map embedded_printf() to ebd_printf() so your code can use the
+ * shorter ebd_printf()
+ */
 //#define embedded_printf(x)		ebd_printf(x)
 
 
