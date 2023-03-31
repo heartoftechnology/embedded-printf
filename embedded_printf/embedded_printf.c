@@ -86,6 +86,36 @@
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
+
+/*
+ * There are 3 internal flags used:
+ * 		FLAG_HEX_USE_CAPITALS	tells the formatter we need to use capitals for
+ * 							   	the current hexadecimal value. Used with %X
+ * 							   	(as opposed to %x).
+ * 		FLAG_USE_ZERO_PADDING  	tells the formatter to use zero padding instead
+ * 								of spaces if the formatted number is smaller
+ * 								than the specified width
+ * 		FLAG_IS_NOT_FIRST_DIGIT	when dividing a decimal integer into its
+ * 								separate parts the formatter divides it by
+ * 								powers of 10. When doing to it may encounter 0
+ * 								as the result and it needs to know
+ * 								whether it's one of two possible things:
+ * 								- It's because the integer it's working on
+ * 								is smaller than the current divisor. So it needs
+ * 								to ignore the outcome and continue with the next
+ * 								division. E.g. 65704 / 1000000 = 0. Ignore it
+ * 								until we get the first non-zero digit (i.e. 6)
+ * 								- It's a zero within the integer e.g. the 0 in
+ * 								65704. In that case the zero always follows a
+ * 								non-zero digit, no matter how larger the number.
+ * 								In that case it needs to put '0' in the output
+ * 								buffer.
+ * 								(Note: when the integer value is actual 0, it's
+ * 								handled outside of the division. The remainder
+ * 								after the divisions will eventually always be a
+ * 								number 0 - 9, and put directly into the output
+ * 								buffer.)
+ */
 #define FLAG_HEX_USE_CAPITALS	(0x1)
 #define FLAG_USE_ZERO_PADDING	(0x2)
 #define FLAG_IS_NOT_FIRST_DIGIT (0x4)
@@ -162,7 +192,8 @@ static void divideAndPutInOutputBuffer(uint32_t * number, uint32_t dividend);
  * Comments:
  * - I decided to create this function without any use of 'goto'
  * - Remember "var = *(p++)" results in "1: var = *p; 2: p = p+1;" This is since
- *   i++ means increase i, but return the value if i before increasing.
+ *   i++ means increase i, but return the value if i before increasing. It is
+ *   the same as the commonly used *p++
  *
  *END**************************************************************************/
 void embedded_printf(const uint8_t *format, ...)

@@ -197,7 +197,7 @@ extern "C" {
  * s	string of characters
  * u	unsigned decimal integer
  * x	unsigned hexadecimal integer
- * X	unsigner hexadecimal integer with capital letters
+ * X	unsigned hexadecimal integer with capital letters
  *
  * @Note
  * 1. All integers are interpreted as 32 bits
