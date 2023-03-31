@@ -1,6 +1,8 @@
 # Embedded printf
 A tiny footprint printf function for 32bits embedded microcontroller applications based on [Kustaa Nyholm's Tiny printf](http://www.sparetimelabs.com/printfrevisited/printfrevisited.php)
 
+Update 2023: If you are looking for a printf that has full functionality, but is also made to be small and fast for embedded systems, **and** even thread safe. Have a look at [eyalroz/printf](https://github.com/eyalroz/printf)
+
 ## A tiny printf for embedded use
 Embedded printf finds its origin in the search for a small printf function to use with ARM Cortex-M microcontrollers. Printf in conjuction with a UART and serial-to-USB converter is a convenient way to get debug information out of the controller during development. However the C standard printf library function is not really usable in microcontrollers with small ROM (Flash) sizes as it takes a lot of space leaving little to none for the 'real' code.  
 
@@ -20,7 +22,7 @@ The C standard printf function uses the following format tag prototype:
 ```
 %[flags][width][.precision][length]specifier
 ```
-Embedded printf does **not support floating point** or the **length parameter** and so has a stripped down format tag prototype:
+Embedded printf does **not support floating point** nor the **length parameter** and so has a stripped down format tag prototype:
 ```
 %[flags][width]specifier
 ```
@@ -50,7 +52,7 @@ X	| unsigner hexadecimal integer with capital letters
 ## How to use the library
 The function embedded_printf() can be used in the same way as printf is used but with limited functionality as described above. In order to get the library running in a project follow these steps:  
 
-1. In embedded_printf.h, include the definition for **ASSERT**. Alternatively define ASSERT but leave it blank.
+1. In embedded_printf.h, include the definition for **ASSERT**.
 2. In embedded_printf.h, edit the macro **embedded_putChar(u8character)** to map it to the desired character output function. See code below which uses the UART_PutChar function as example:  
 
     ```c
@@ -61,10 +63,14 @@ The function embedded_printf() can be used in the same way as printf is used but
 
     ```c
     /*!< Macro to map printf to embedded_printf */
-    #undef  printf      //optional
-    #define printf			embedded_printf
+    #undef  printf(x)      //optional
+    #define printf(x)			embedded_printf(x)
     ```
-
+	**Warning** modern compilers recognise printf() like statements and may ignore embedded_printf, and simply pull in the C standard code anyway. If you prefer a shorter function name it may be best to use emb_printf() for example;
+    ```c
+    /*!< Macro to map embedded_printf() to ebd_printf() so your code can use the shorter ebd_printf()*/
+    #define embedded_printf(x)		ebd_printf(x)
+    ```	
 
 ## License
 Since embedded printf is mostly a rewrite of Tiny printf two licenses apply: the Tiny printf license and the Embedded printf license.
